@@ -1,0 +1,6 @@
+{
+  "name": "Brew & Bean - 스페셜티 커피 메뉴 & 원두 도감",
+  "description": "아메리카노, 에스프레소, 카페라떼, 바닐라라떼, 크림라떼, 초코라떼의 특징과 추출 원두 정보를 상세히 탐색하고 비교하는 스페셜티 커피 메뉴 플랫폼",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
