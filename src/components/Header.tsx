@@ -1,11 +1,13 @@
 import React from 'react';
-import { ShoppingBag, GitCompare, BookOpen, Coffee } from 'lucide-react';
+import { ShoppingBag, GitCompare, BookOpen, Coffee, FileSpreadsheet } from 'lucide-react';
 
 interface HeaderProps {
   onOpenCompare: () => void;
   onOpenBeanGuide: () => void;
   onOpenCart: () => void;
+  onOpenOrderSheet: () => void;
   cartCount: number;
+  orderSheetCount: number;
   onSelectCategory: (category: string) => void;
   activeCategory: string;
 }
@@ -14,7 +16,9 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenCompare,
   onOpenBeanGuide,
   onOpenCart,
+  onOpenOrderSheet,
   cartCount,
+  orderSheetCount,
   onSelectCategory,
   activeCategory,
 }) => {
@@ -40,7 +44,7 @@ export const Header: React.FC<HeaderProps> = ({
           </a>
 
           {/* Zone 2: Clean text navigation links */}
-          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-stone-600">
+          <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-stone-600">
             <button
               onClick={() => onSelectCategory('all')}
               className={`hover:text-stone-900 transition-colors cursor-pointer py-1 ${
@@ -88,26 +92,52 @@ export const Header: React.FC<HeaderProps> = ({
               <BookOpen className="w-4 h-4" />
               <span>원두 도감</span>
             </button>
+            <button
+              onClick={onOpenOrderSheet}
+              className="flex items-center gap-1.5 text-emerald-800 hover:text-emerald-950 font-semibold transition-colors cursor-pointer"
+            >
+              <FileSpreadsheet className="w-4 h-4 text-emerald-700" />
+              <span>주문 확인 시트</span>
+              {orderSheetCount > 0 && (
+                <span className="text-[10px] bg-emerald-100 text-emerald-800 font-bold px-1.5 py-0.2 rounded-full tabular-nums">
+                  {orderSheetCount}
+                </span>
+              )}
+            </button>
           </nav>
 
           {/* Zone 3: 1-2 primary actions */}
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3">
+            <button
+              onClick={onOpenOrderSheet}
+              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-semibold text-emerald-800 bg-emerald-50 hover:bg-emerald-100 border border-emerald-300 rounded-md transition-colors whitespace-nowrap cursor-pointer shadow-xs"
+              title="주문 확인 및 구글 시트 연동"
+            >
+              <FileSpreadsheet className="w-3.5 h-3.5 text-emerald-700" />
+              <span>확인 시트</span>
+              {orderSheetCount > 0 && (
+                <span className="inline-flex items-center justify-center px-1.5 text-[10px] font-bold text-white bg-emerald-700 rounded-full tabular-nums">
+                  {orderSheetCount}
+                </span>
+              )}
+            </button>
+
             <button
               onClick={onOpenCompare}
-              className="flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-md transition-colors whitespace-nowrap cursor-pointer"
+              className="hidden sm:flex items-center gap-1.5 px-3 py-1.5 text-xs font-medium text-stone-700 bg-stone-100 hover:bg-stone-200 rounded-md transition-colors whitespace-nowrap cursor-pointer"
               title="음료 스펙 & 원두 비교하기"
             >
               <GitCompare className="w-3.5 h-3.5" />
-              <span className="hidden sm:inline">음료 비교</span>
+              <span>음료 비교</span>
             </button>
 
             <button
               onClick={onOpenCart}
-              className="relative flex items-center gap-2 px-3.5 py-1.5 text-xs font-medium text-white bg-stone-900 hover:bg-stone-800 rounded-md transition-colors whitespace-nowrap cursor-pointer shadow-sm"
-              aria-label="주문서 및 장바구니"
+              className="relative flex items-center gap-2 px-3 py-1.5 text-xs font-medium text-white bg-stone-900 hover:bg-stone-800 rounded-md transition-colors whitespace-nowrap cursor-pointer shadow-sm"
+              aria-label="장바구니"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
-              <span>주문서</span>
+              <span className="hidden sm:inline">장바구니</span>
               {cartCount > 0 && (
                 <span className="inline-flex items-center justify-center w-5 h-5 text-[11px] font-semibold text-stone-900 bg-amber-400 rounded-full tabular-nums">
                   {cartCount}
@@ -120,3 +150,4 @@ export const Header: React.FC<HeaderProps> = ({
     </header>
   );
 };
+

@@ -23,6 +23,12 @@ interface DrinkDetailViewProps {
   onAddToCart: (drink: CoffeeDrink, custom: CustomizationState, price: number) => void;
   onOpenBeanGuide: () => void;
   onOpenCompareWith: (drink: CoffeeDrink) => void;
+  onOpenOrderConfirm: (
+    drink: CoffeeDrink,
+    custom: CustomizationState,
+    selectedBean: BeanInfo,
+    price: number
+  ) => void;
 }
 
 export const DrinkDetailView: React.FC<DrinkDetailViewProps> = ({
@@ -30,6 +36,7 @@ export const DrinkDetailView: React.FC<DrinkDetailViewProps> = ({
   onAddToCart,
   onOpenBeanGuide,
   onOpenCompareWith,
+  onOpenOrderConfirm,
 }) => {
   // Customization State
   const [temp, setTemp] = useState<'HOT' | 'ICE'>(drink.defaultTemp);
@@ -75,6 +82,7 @@ export const DrinkDetailView: React.FC<DrinkDetailViewProps> = ({
       sweetnessId,
     };
     onAddToCart(drink, custom, totalPrice);
+    onOpenOrderConfirm(drink, custom, currentBean, totalPrice);
     setAddedToast(true);
     setTimeout(() => setAddedToast(false), 2200);
   };

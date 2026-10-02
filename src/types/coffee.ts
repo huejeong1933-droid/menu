@@ -95,3 +95,24 @@ export interface CartItem {
   quantity: number;
   selectedBean: BeanInfo;
 }
+
+export type OrderStatus = '접수 완료' | '추출 중' | '제조 완료';
+
+export interface ConfirmedOrder {
+  orderId: string;
+  orderNumber: number;
+  createdAt: string;
+  drinkName: string;
+  drinkEn: string;
+  temp: 'HOT' | 'ICE';
+  size: string;
+  beanName: string;
+  beanOrigin: string;
+  roastLevel: string;
+  optionsSummary: string;
+  quantity: number;
+  unitPrice: number;
+  totalPrice: number;
+  status: OrderStatus;
+  notes?: string;
+}
